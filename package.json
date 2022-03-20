@@ -1,0 +1,12 @@
+{
+  "name": "query-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "php": "php -S localhost:8000"
+  },
+  "keywords": [],
+  "author": "Naif Sameer",
+  "license": "MIT"
+}
