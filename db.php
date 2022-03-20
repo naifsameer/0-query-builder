@@ -178,14 +178,22 @@ class Database
   }
 
   public function select(
-    array $table_columns = ["*"]
+    ...$table_columns
   ) {
-    $columns_name = "";
-    foreach ($table_columns as $column) {
-      $columns_name .= "'$column' ,";
+    // check param
+    if (count($table_columns)) {
+      $columns_name = "";
+
+      foreach ($table_columns as $column) {
+        $columns_name .= "'$column' ,";
+      }
+
+      // remove last comma
+      $columns_name = substr($columns_name, 0, -1);
+    } else {
+      $columns_name = "*";
     }
-    // remove last comma
-    $columns_name = substr($columns_name, 0, -1);
+
 
     $query = "SELECT $columns_name FROM `{$this->table_name}` ";
 
@@ -271,7 +279,7 @@ $user = $db->table("users");
 
 print_r(
   $user
-    ->select(['user.id', 'customer.name'])->orderBy('name')->where('id', 'naif')->orWhere('name', 'ali')->getQuery()
+    ->select('id', 'name')->orderBy('name')->where('id', 'naif')->orWhere('name', 'ali')->getQuery()
 );
 
 
